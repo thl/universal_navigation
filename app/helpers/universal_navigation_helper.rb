@@ -34,7 +34,7 @@ module UniversalNavigationHelper
         :path => "/",
         :tabs => {
           :home => {:subdomain => :places, :home_path => "/", :entity_path => "/"},
-          :media => {:subdomain => :media, :home_path => "/", :entity_path => "/media_administrative_locations?administrative_unit_id=:id"},
+          :media => {:subdomain => :media, :home_path => "/", :entity_path => "/places/:id"},
           :topics => {:subdomain => :topics, :home_path => "/", :entity_path => "/places/:id"}
         }
       },
@@ -202,12 +202,10 @@ module UniversalNavigationHelper
   end
   
   def javascript_files
-    #super + ['jquery-ui-tabs', 'universal-navigation']
     super + ['universal-navigation']
   end
     
   def stylesheet_files
-    #super + ['jquery-ui-tabs', 'universal_navigation']
     super + ['universal_navigation']
   end
   
