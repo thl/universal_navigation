@@ -16,17 +16,18 @@ module UniversalNavigationHelper
   #
   def un_tabs
     [
-      {
-        :id => :home,
-        :title => "Home",
-        :subdomain => :places,
-        :path => "/",
-        :tabs => {
-          :media => {:subdomain => :media, :home_path => "/", :entity_path => "/"},
-          :places => {:subdomain => :places, :home_path => "/", :entity_path => "/"},
-          :topics => {:subdomain => :topics, :home_path => "/", :entity_path => "/"}
-        }
-      },
+      # This will eventually be a universal "Search" tab that lets you search all apps
+      #{
+      #  :id => :search,
+      #  :title => "Search",
+      #  :subdomain => :search,
+      #  :path => "/",
+      #  :tabs => {
+      #    :media => {:subdomain => :media, :home_path => "/", :entity_path => "/"},
+      #    :places => {:subdomain => :places, :home_path => "/", :entity_path => "/"},
+      #    :topics => {:subdomain => :topics, :home_path => "/", :entity_path => "/"}
+      #  }
+      #},
       {
         :id => :places,
         :title => "Places",
@@ -110,8 +111,15 @@ module UniversalNavigationHelper
   # Given a subdomain and optional path, get the full URL
   #
   def un_url(subdomain, path="", entity_id=false)
+    # Need to find a way to get root URLs from .get_url instead of un_environment_subdomains, even for the
+    # current app's own subdomain (e.g. in the PD, PlacesResource doesn't exist)
+    #subdomain_hostname = case subdomain
+    #  when :places then PlacesResource.get_url
+    #  when :media then MediaManagementResource.get_url
+    #  else un_environment_subdomains[subdomain][un_get_environment]
+    #end
     subdomain_hostname = un_environment_subdomains[subdomain][un_get_environment]
-    path.sub!(":id", entity_id) if entity_id
+    path.sub!(":id", entity_id.to_s) if entity_id
     "http://#{subdomain_hostname}#{path}"
   end
     
@@ -131,7 +139,15 @@ module UniversalNavigationHelper
   # Determines whether the home path or the entity path should be used
   #
   def un_path_type
-    params[:id].blank? ? :home_path : :entity_path
+    un_entity ? :entity_path : :home_path
+  end
+  
+  #
+  # Returns the active entity, if it exists (it needs to be specified in @un_options[:entity] to exist)
+  #
+  def un_entity
+    @un_options ||= {}
+    @un_options[:entity].blank? ? false : @un_options[:entity]
   end
   
   #
@@ -214,17 +230,23 @@ module UniversalNavigationHelper
   #
   def un_tab_list_items(active_tab_id=:places)
     @un_options ||= {}
-    @un_options[:entity_id] ||= params[:id]
     active_tab_related_tabs = get_tab_by_id(active_tab_id)[:tabs]
     un_tabs.collect{|tab|
       tab_id = tab[:id]
       if active_tab_id == tab_id
         href = "#universal_tabs_#{active_tab_id}"
       else
-        href = un_url(tab[:subdomain], active_tab_related_tabs[tab_id][un_path_type], @un_options[:entity_id])
+        entity_id = un_entity ? un_entity.id : nil
+        href = un_url(tab[:subdomain], active_tab_related_tabs[tab_id][un_path_type], entity_id)
+      end
+      if un_entity
+        related_entities_method = @un_options[:related_entities_method].blank? ? tab[:subdomain] : @un_options[:related_entities_method].to_sym
+        if un_entity.respond_to? related_entities_method
+          related_entities_count = un_entity.send(related_entities_method).length
+        end
       end
       "<li>
-        <a href='#{href}'><span>#{tab[:title]}</span></a>
+        <a href='#{href}'><span>#{tab[:title]}#{' ('+related_entities_count.to_s+')' unless related_entities_count.nil?}</span></a>
       </li>"
     }.join("\n\t\t")
   end
