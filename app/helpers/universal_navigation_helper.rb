@@ -34,7 +34,6 @@ module UniversalNavigationHelper
         :subdomain => :places,
         :path => "/",
         :tabs => {
-          :home => {:subdomain => :places, :home_path => "/", :entity_path => "/"},
           :media => {:subdomain => :media, :home_path => "/", :entity_path => "/places/:id"},
           :topics => {:subdomain => :topics, :home_path => "/", :entity_path => "/places/:id"}
         }
@@ -45,7 +44,6 @@ module UniversalNavigationHelper
         :subdomain => :topics,
         :path => "/",
         :tabs => {
-          :home => {:subdomain => :places, :home_path => "/", :entity_path => "/"},
           :media => {:subdomain => :media, :home_path => "/", :entity_path => "/topics/:id"},
           :places => {:subdomain => :places, :home_path => "/", :entity_path => "/topics/:id"}
         }
@@ -56,7 +54,6 @@ module UniversalNavigationHelper
         :subdomain => :media,
         :path => "/",
         :tabs => {
-          :home => {:subdomain => :places, :home_path => "/", :entity_path => "/"},
           :topics => {:subdomain => :topics, :home_path => "/", :entity_path => "/media/:id"},
           :places => {:subdomain => :places, :home_path => "/", :entity_path => "/media/:id"}
         }
