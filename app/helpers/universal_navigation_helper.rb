@@ -55,8 +55,8 @@ module UniversalNavigationHelper
         :subdomain => :media,
         :path => "/",
         :tabs => {
-          :topics => {:subdomain => :topics, :home_path => "/", :entity_path => "/media/:id"},
-          :places => {:subdomain => :places, :home_path => "/", :entity_path => "/media/:id"}
+          :topics => {:subdomain => :topics, :home_path => "/", :entity_path => "/media_objects/:id"},
+          :places => {:subdomain => :places, :home_path => "/", :entity_path => "/media_objects/:id"}
         }
       }
     ]
@@ -291,7 +291,7 @@ module UniversalNavigationHelper
   
   #
   # This can be called from controllers or views to change the path of the tab's link:
-  # set_un_tab_path :places, "/features/59/media"
+  # set_un_tab_path :places, "/features/59/media_objects"
   #
   def set_un_tab_path(tab_id, path)
     @un_options ||= {}
