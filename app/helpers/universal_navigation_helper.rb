@@ -36,7 +36,8 @@ module UniversalNavigationHelper
         :tabs => {
           :media => {:subdomain => :media, :home_path => "/", :entity_path => "/places/:id"},
           :topics => {:subdomain => :topics, :home_path => "/", :entity_path => "/places/:id"}
-        }
+        },
+        :entity_id_method => :fid
       },
       {
         :id => :topics,
@@ -227,23 +228,29 @@ module UniversalNavigationHelper
   #
   def un_tab_list_items(active_tab_id=:places)
     @un_options ||= {}
-    active_tab_related_tabs = get_tab_by_id(active_tab_id)[:tabs]
+    active_tab = get_tab_by_id(active_tab_id)
+    active_tab_related_tabs = active_tab[:tabs]
+    entity_id_method = active_tab[:entity_id_method].blank? ? :id : active_tab[:entity_id_method].to_sym
     un_tabs.collect{|tab|
       tab_id = tab[:id]
       if active_tab_id == tab_id
         href = "#universal_tabs_#{active_tab_id}"
       else
-        entity_id = un_entity ? un_entity.id : nil
+        entity_id = un_entity ? un_entity.send(entity_id_method) : nil
         href = un_url(tab[:subdomain], active_tab_related_tabs[tab_id][un_path_type], entity_id)
       end
-      if un_entity
-        related_entities_method = @un_options[:related_entities_method].blank? ? tab[:subdomain] : @un_options[:related_entities_method].to_sym
-        if un_entity.respond_to? related_entities_method
-          related_entities_count = un_entity.send(related_entities_method).length
-        end
-      end
+      # For getting counts of related entities (not yet implemented)
+      #if un_entity
+      #  related_entities_method = @un_options[:related_entities_method].blank? ? tab[:subdomain] : @un_options[:related_entities_method].to_sym
+      #  if un_entity.respond_to? related_entities_method
+      #    related_entities_count = un_entity.send(related_entities_method).length
+      #  end
+      #end
+      #"<li>
+      #  <a href='#{href}'><span>#{tab[:title]}#{' ('+related_entities_count.to_s+')' unless related_entities_count.nil?}</span></a>
+      #</li>"
       "<li>
-        <a href='#{href}'><span>#{tab[:title]}#{' ('+related_entities_count.to_s+')' unless related_entities_count.nil?}</span></a>
+        <a href='#{href}'><span>#{tab[:title]}</span></a>
       </li>"
     }.join("\n\t\t")
   end
