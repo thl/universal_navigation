@@ -38,7 +38,7 @@ module UniversalNavigationHelper
         :app => :topics,
         :url_method => :kmaps_url,
         :count_method => :category_count,
-        :count_method_args => {:cumulative => true}
+        #:count_method_args => {:cumulative => true}
       },
       {
         :id => :pictures,
