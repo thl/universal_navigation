@@ -19,6 +19,12 @@ module UniversalNavigationHelper
         :title => "Media",
         :app => :media,
         :url => defined?(MediaManagementResource.get_url) ? MediaManagementResource.get_url : false
+      },
+      {
+        :id => :dictionary,
+        :title => "Dictionary",
+        :app => :dictionary,
+        :url => defined?(DictionaryResource.get_url) ? DictionaryResource.get_url : false
       }
     ]
   end
