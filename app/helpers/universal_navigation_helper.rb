@@ -125,11 +125,11 @@ module UniversalNavigationHelper
       url = tab[2]
       if current_tab_id == tab_id
         "<li class='ui-state-active ui-tabs-selected'>
-          <a><span>#{title}</span></a>
+          <a href='#{url}' id=uitab_#{title}><span>#{title}</span></a>
         </li>"
       else
         "<li class='ui-tabs-unselected'>
-          <a href='#{url}'><span>#{title}</span></a>
+          <a href='#{url}' id=uitab_#{title}><span>#{title}</span></a>
         </li>"
       end
     }.join("\n\t\t")
