@@ -22,7 +22,7 @@ module UniversalNavigationHelper
       },
       {
         :id => :dictionary,
-        :title => "Dictionary",
+        :title => "Tibetan",
         :app => :dictionary,
         :url => defined?(DictionaryResource.get_url) ? DictionaryResource.get_url : false
       }
