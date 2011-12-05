@@ -25,6 +25,12 @@ module UniversalNavigationHelper
         :title => "Tibetan",
         :app => :dictionary,
         :url => defined?(DictionaryResource.get_url) ? DictionaryResource.get_url : false
+      },
+      {
+        :id => :himalayan_search,
+        :title => "Himalayan",
+        :app => :himalayan_search,
+        :url => defined?(MediaManagementResource.get_url) ? MediaManagementResource.get_url + 'dictionary_searches/new' : false
       }
     ]
   end
@@ -94,7 +100,7 @@ module UniversalNavigationHelper
   #
   def secondary_tabs_list_items(current_app_id, current_tab_id, custom_secondary_tabs)
     @tab_options ||= {}
-    if current_app_id == :dictionary
+    if current_app_id == :dictionary or current_app_id== :himalayan_search
       tabs = custom_secondary_tabs
     else
        tabs = [[:home, "Home", "#{ActionController::Base.relative_url_root}/"]] + custom_secondary_tabs
