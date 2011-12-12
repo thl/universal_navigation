@@ -24,7 +24,7 @@ module UniversalNavigationHelper
         :id => :dictionary,
         :title => "Tibetan",
         :app => :dictionary,
-        :url => defined?(DictionaryResource.get_url) ? DictionaryResource.get_url : false
+        :url => defined?(DictionaryResource.prefix_for_url) ? DictionaryResource.prefix_for_url : false
       },
       {
         :id => :himalayan_search,
