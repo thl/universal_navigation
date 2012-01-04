@@ -10,7 +10,7 @@ module UniversalNavigationHelper
       },
       {
         :id => :topics,
-        :title => "Topics",
+        :title => Category.human_name(:count => :many).titleize.s,
         :app => :topics,
         :url => defined?(TopicalMapResource.get_url) ? TopicalMapResource.get_url : false
       },
@@ -46,7 +46,7 @@ module UniversalNavigationHelper
       },
       {
         :id => :topics,
-        :title => "Topics",
+        :title => Category.human_name(:count => :many).titleize.s,
         :app => :topics,
         :url_method => :kmaps_url,
         :count_method => :category_count,
@@ -174,5 +174,4 @@ module UniversalNavigationHelper
   def stylesheet_files
     super + ['universal_navigation']
   end
-
 end
