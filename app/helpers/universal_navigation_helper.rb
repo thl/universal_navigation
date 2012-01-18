@@ -16,7 +16,7 @@ module UniversalNavigationHelper
       },
       {
         :id => :media,
-        :title => "Media",
+        :title => Medium.human_name(:count => :many).titleize.s,
         :app => :media,
         :url => defined?(MediaManagementResource.get_url) ? MediaManagementResource.get_url : false
       },
