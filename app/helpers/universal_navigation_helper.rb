@@ -91,7 +91,7 @@ module UniversalNavigationHelper
           <a href='#{tab[:url]}'><span>#{tab[:title]}</span></a>
         </li>"
       end
-    }.join("\n\t\t")
+    }.join("\n\t\t").html_safe
   end
 
   #
@@ -138,7 +138,7 @@ module UniversalNavigationHelper
           <a href='#{url}' id=uitab_#{title}><span>#{title}</span></a>
         </li>"
       end
-    }.join("\n\t\t")
+    }.join("\n\t\t").html_safe
   end
 
   #
@@ -150,24 +150,14 @@ module UniversalNavigationHelper
       secondary_tab_id = args[1]
       custom_secondary_tabs = args[2] || []
       options = args[3] || {}
-      
-      concat("
-        <div id='universal_navigation' class='ui-tabs'>
-        
+      ("<div id='universal_navigation' class='ui-tabs'>
       		<ul class='primary-tabs ui-tabs-nav'>
       			#{primary_tabs_list_items primary_tab_id}
       		</ul>
-    		  
       		<ul class='secondary-tabs ui-tabs-nav'>
       			#{secondary_tabs_list_items primary_tab_id, secondary_tab_id, custom_secondary_tabs}
-      		</ul>
-    		
-      		<div id='universal_navigation_content' class='ui-tabs-panel'>
-      	    #{capture(&block)}
-      	  </div>
-    	  
-      	</div>
-      ")
+      		</ul>" + content_tag(:div, :class => 'ui-tabs-panel', :id => 'universal_navigation_content', &block) +
+      "</div>").html_safe
     end
   end
 
