@@ -103,7 +103,7 @@ module UniversalNavigationHelper
     if current_app_id == :dictionary or current_app_id== :himalayan_search
       tabs = custom_secondary_tabs
     else
-       tabs = [[:home, "Home", "#{ActionController::Base.relative_url_root}/"]] + custom_secondary_tabs
+       tabs = [[:home, "Home", "#{ActionController::Base.config.relative_url_root}/"]] + custom_secondary_tabs
     end
     unless @tab_options[:entity].blank?
       entity = @tab_options[:entity]
