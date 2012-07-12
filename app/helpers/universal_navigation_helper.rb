@@ -18,7 +18,7 @@ module UniversalNavigationHelper
         :id => :media,
         :title => Medium.model_name.human(:count => :many).titleize.s,
         :app => :media,
-        :url => defined?(MediaManagementResource.get_url) ? MediaManagementResource.get_url : false
+        :url => defined?(MediaManagementResource.get_url) ? MediaManagementResource.get_url : root_path
       },
       {
         :id => :dictionary,
@@ -30,7 +30,7 @@ module UniversalNavigationHelper
         :id => :himalayan_search,
         :title => "Himalayan",
         :app => :himalayan_search,
-        :url => defined?(MediaManagementResource.get_url) ? MediaManagementResource.get_url + 'dictionary_searches/new' : false
+        :url => (defined?(MediaManagementResource.get_url) ? MediaManagementResource.get_url : root_path) + 'dictionary_searches/new'
       }
     ]
   end
