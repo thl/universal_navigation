@@ -1,10 +1,20 @@
-Universal Navigation
-=========
+= UniversalNavigation
 
 Universal Navigation allows for multiple Rails apps to use a single set of tabs to navigation between them.  The tabs will use either the app's "home_path" (the landing page of the app) or "entity_path" (a page dedicated to listing entities that are related to the previous page's entity), depending on the context.
 
-The only required Rails plugin is: 
-- jrails			git://github.com/aaronchi/jrails.git
+INSTALLATION
+
+Include in the app's Gemfile:
+
+gem 'universal_navigation', '2.0.0', :git => 'https://github.com/thl/universal_navigation.git', :tag => 'v2.0.0'
+
+Include in the main application's app/assets/javascripts/application.js:
+
+//= require universal_navigation/application
+
+Include in the main application's app/assets/stylesheets/application.css:
+
+*= require universal_navigation/application
 
 The jQuery UI library is also required, and it needs to include UI Tabs.  This plugin has currently only been tested on jQuery 1.3.2 and jQuery UI 1.7.
 

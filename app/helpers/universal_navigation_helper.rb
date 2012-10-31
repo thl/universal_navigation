@@ -160,8 +160,4 @@ module UniversalNavigationHelper
       "</div>").html_safe
     end
   end
-
-  def stylesheet_files
-    super + ['universal_navigation']
-  end
 end
