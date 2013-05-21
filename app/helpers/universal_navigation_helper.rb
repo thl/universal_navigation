@@ -10,13 +10,13 @@ module UniversalNavigationHelper
       },
       {
         :id => :topics,
-        :title => Category.model_name.human(:count => :many).titleize.s,
+        :title => Category.human_name(:count => :many).titleize.s,
         :app => :topics,
         :url => defined?(TopicalMapResource.get_url) ? TopicalMapResource.get_url : false
       },
       {
         :id => :media,
-        :title => Medium.model_name.human(:count => :many).titleize.s,
+        :title => Medium.human_name(:count => :many).titleize.s,
         :app => :media,
         :url => defined?(MediaManagementResource.get_url) ? MediaManagementResource.get_url : root_path
       },
@@ -46,7 +46,7 @@ module UniversalNavigationHelper
       },
       {
         :id => :topics,
-        :title => Category.model_name.human(:count => :many).titleize.s,
+        :title => Category.human_name(:count => :many).titleize.s,
         :app => :topics,
         :url_method => :kmaps_url,
         :count_method => :category_count,
