@@ -41,14 +41,14 @@ module UniversalNavigationHelper
         :id => :places,
         :title => "Places",
         :app => :places,
-        :url_method => :places_url,
+        :url_method => :kmaps_url,
         :count_method => :feature_count
       },
       {
         :id => :topics,
         :title => Category.human_name(:count => :many).titleize.s,
         :app => :topics,
-        :url_method => :kmaps_url,
+        :url_method => :topical_map_url,
         :count_method => :category_count,
         #:count_method_args => {:cumulative => true}
       },
