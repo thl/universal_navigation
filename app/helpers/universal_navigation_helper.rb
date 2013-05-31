@@ -1,40 +1,4 @@
 module UniversalNavigationHelper
-
-  def primary_tabs_list
-    [
-      {
-        :id => :places,
-        :title => "Places",
-        :app => :places,
-        :url => defined?(PlacesResource.get_url) ? PlacesResource.get_url : false
-      },
-      {
-        :id => :topics,
-        :title => Category.human_name(:count => :many).titleize.s,
-        :app => :topics,
-        :url => defined?(TopicalMapResource.get_url) ? TopicalMapResource.get_url : false
-      },
-      {
-        :id => :media,
-        :title => Medium.human_name(:count => :many).titleize.s,
-        :app => :media,
-        :url => defined?(MediaManagementResource.get_url) ? MediaManagementResource.get_url : root_path
-      },
-      {
-        :id => :dictionary,
-        :title => "Tibetan",
-        :app => :dictionary,
-        :url => defined?(DictionarySite.get_url) ? DictionarySite.get_url : false
-      },
-      {
-        :id => :himalayan_search,
-        :title => "Himalayan",
-        :app => :himalayan_search,
-        :url => (defined?(MediaManagementResource.get_url) ? MediaManagementResource.get_url : root_path) + 'dictionary_searches/new'
-      }
-    ]
-  end
-  
   def secondary_tabs_list
     [
       {
