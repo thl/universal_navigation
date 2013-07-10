@@ -10,7 +10,7 @@ module UniversalNavigationHelper
       },
       {
         :id => :topics,
-        :title => Category.human_name(:count => :many).titleize.s,
+        :title => SubjectsIntegration::Feature.human_name(:count => :many).titleize.s,
         :app => :topics,
         :url_method => :topical_map_url,
         :count_method => :category_count,
