@@ -1,13 +1,14 @@
 module UniversalNavigationHelper
   def secondary_tabs_list
-    [
+    array = [
       {
         :id => :places,
         :title => "Places",
         :app => :places,
         :url_method => :kmaps_url,
         :count_method => :feature_count
-      },
+      }]
+    array <<
       {
         :id => :topics,
         :title => SubjectsIntegration::Feature.human_name(:count => :many).titleize.s,
@@ -15,7 +16,8 @@ module UniversalNavigationHelper
         :url_method => :topical_map_url,
         :count_method => :category_count,
         #:count_method_args => {:cumulative => true}
-      },
+      } if defined?(SubjectsIntegration)
+    array = array + [
       {
         :id => :pictures,
         :title => "Pictures",
