@@ -1,0 +1,16 @@
+<% tabs_list = active_secondary_tabs_list(current_app_id, @current_tab_id, custom_secondary_tabs(@current_tab_id)).reject{ |tab| tab.first==@current_tab_id }
+   tabs_list.each do |tab| %>
+     <article class="tab-pane main-col" id="<%= tab[0] %>"></article>
+<%=  javascript_on_load do %>
+	   $('a[href="#<%= tab[0] %>"]').on('shown.bs.tab', function (e) {
+		 if($('div.tab-content > #<%= tab[0] %>').html().length==0) {
+<%       url = tab[2]
+         if url.start_with? '/' %>
+           $.ajax({url: '<%= url %>', type: 'GET', dataType: 'script'});
+<%       else %>
+           window.location.href = "<%= url %>";
+<%       end %>
+		 }
+	   });
+<%   end %>
+<% end %>
