@@ -62,7 +62,7 @@ module UniversalNavigationHelper
       secondary_tabs_list.each{|tab|
         # Only show tabs from other apps (so that Topics doesn't show up in Topical Map, for example)
         unless current_app_id == tab[:app]
-          url = entity.send(tab[:url_method])
+          url = send(tab[:url_method], entity)
           if tab[:count_method].blank?
             tabs << [tab[:id], tab[:title], url]
           else
