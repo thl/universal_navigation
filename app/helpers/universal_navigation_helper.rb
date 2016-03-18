@@ -71,7 +71,7 @@ module UniversalNavigationHelper
             else
               count = entity.send(tab[:count_method], tab[:count_method_args])
             end
-            tabs << [tab[:id], "#{tab[:title]} (#{count})", url, tab[:shanticon]] if count > 0
+            tabs << [tab[:id], "#{tab[:title]} <span class=\"badge\">#{count}</span>", url, tab[:shanticon]] if count > 0
           end
         end
       }
@@ -91,11 +91,11 @@ module UniversalNavigationHelper
       # url = tab[2] USE THIS FOR JS
       if current_tab_id == tab_id
         "<li class=\"#{tab_id}\ active\">
-          <a href=\"\##{tab_id}\" data-toggle=\"pill\"><i class=\"icon shanticon-#{shanticon}\"></i>#{title}</a>
+          <a href=\"\##{tab_id}\" data-toggle=\"pill\"><span class=\"icon shanticon-#{shanticon}\"></span>#{title}</a>
         </li>"
       else
         "<li class=\"#{tab_id}\">
-          <a href='\##{tab_id}' data-toggle=\"pill\"><i class=\"icon shanticon-#{shanticon}\"></i>#{title}</a>
+          <a href='\##{tab_id}' data-toggle=\"pill\"><span class=\"icon shanticon-#{shanticon}\"></span>#{title}</a>
         </li>"
       end
     end.join("\n").html_safe
@@ -105,7 +105,7 @@ module UniversalNavigationHelper
   # Returns the HTML for creating the tabs.  Currently only accepts a block instead of a string
   #
   def universal_navigation(*args)
-    "<aside class=\"content-resources col-xs-6 col-sm-3 sidebar-offcanvas equal-height\">
+    "<aside class=\"content-resources col-xs-6 col-sm-3 col-md-3 col-lg-2 sidebar-offcanvas equal-height\">
     		<ul class=\"nav nav-pills nav-stacked\">
     			#{secondary_tabs_list_items *args}
     		</ul>
