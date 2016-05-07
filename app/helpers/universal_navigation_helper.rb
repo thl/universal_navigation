@@ -22,7 +22,7 @@ module UniversalNavigationHelper
     array = array + [
       {
         :id => :pictures,
-        :title => "Pictures",
+        :title => "Images",
         :app => :media,
         :url_method => :pictures_url,
         :count_method => :media_count,
@@ -31,12 +31,12 @@ module UniversalNavigationHelper
       },
       {
         :id => :videos,
-        :title => "Videos",
+        :title => "Audio-Video",
         :app => :media,
         :url_method => :videos_url,
         :count_method => :media_count,
         :count_method_args => {:type => 'Video'},
-        :shanticon => 'video'
+        :shanticon => 'audio-video'
       },
       {
         :id => :documents,
@@ -52,11 +52,11 @@ module UniversalNavigationHelper
   
   def active_secondary_tabs_list(current_app_id, current_tab_id, custom_secondary_tabs)
     @tab_options ||= {}
-    if current_app_id == :dictionary or current_app_id== :himalayan_search
-      tabs = custom_secondary_tabs || []
-    else
-       tabs = [[:home, "Home", "#{ActionController::Base.config.relative_url_root}/", 'grid']] + custom_secondary_tabs
-    end
+    #if current_app_id == :dictionary or current_app_id== :himalayan_search
+    tabs = custom_secondary_tabs || []
+    #else
+    #   tabs = [[:home, "Home", "#{ActionController::Base.config.relative_url_root}/", 'grid']] + custom_secondary_tabs
+    #end
     unless @tab_options[:entity].blank?
       entity = @tab_options[:entity]
       secondary_tabs_list.each{|tab|
@@ -105,10 +105,10 @@ module UniversalNavigationHelper
   # Returns the HTML for creating the tabs.  Currently only accepts a block instead of a string
   #
   def universal_navigation(*args)
-    "<aside class=\"content-resources col-xs-6 col-sm-3 col-md-3 col-lg-2 sidebar-offcanvas equal-height\">
+    "<section class=\"content-resources col-xs-6 col-sm-3 col-md-3 col-lg-2 sidebar-offcanvas equal-height\">
     		<ul class=\"nav nav-pills nav-stacked\">
     			#{secondary_tabs_list_items *args}
     		</ul>
-     </aside>".html_safe
+     </section>".html_safe
   end
 end
