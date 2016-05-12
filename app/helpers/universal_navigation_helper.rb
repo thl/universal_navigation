@@ -105,7 +105,7 @@ module UniversalNavigationHelper
   # Returns the HTML for creating the tabs.  Currently only accepts a block instead of a string
   #
   def universal_navigation(*args)
-    "<section class=\"content-resources col-xs-6 col-sm-3 col-md-3 col-lg-2 sidebar-offcanvas equal-height\">
+    "<section id=\"sidebar-first\" class=\"region sidebar sidebar-first sidebar-offcanvas col-xs-6 col-md-3 equal-height\">
     		<ul class=\"nav nav-pills nav-stacked\">
     			#{secondary_tabs_list_items *args}
     		</ul>
