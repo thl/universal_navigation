@@ -89,15 +89,9 @@ module UniversalNavigationHelper
       title = tab[1]
       shanticon = tab[3]
       # url = tab[2] USE THIS FOR JS
-      if current_tab_id == tab_id
-        "<li class=\"#{tab_id}\ active\">
-          <a href=\"\##{tab_id}\" data-toggle=\"pill\"><span class=\"icon shanticon-#{shanticon}\"></span>#{title}</a>
-        </li>"
-      else
-        "<li class=\"#{tab_id}\">
-          <a href='\##{tab_id}' data-toggle=\"pill\"><span class=\"icon shanticon-#{shanticon}\"></span>#{title}</a>
-        </li>"
-      end
+      "<li class=\"#{tab_id}#{current_tab_id == tab_id ? ' active' : ''}\">
+        <a href=\"\##{tab_id}\" data-toggle=\"pill\"><span class=\"icon shanticon-#{shanticon}\"></span>#{title}</a>
+      </li>"
     end.join("\n").html_safe
   end
 
