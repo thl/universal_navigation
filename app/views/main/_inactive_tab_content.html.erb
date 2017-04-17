@@ -6,7 +6,15 @@
 		 if($('div.tab-content > #<%= tab[0] %>').html().length==0) {
 <%       url = tab[2]
          if url.start_with? '/' %>
-           $.ajax({url: '<%= url %>', type: 'GET', dataType: 'script'});
+           $("#tab-content-loading").show();
+					 $.ajax({url: '<%= url %>', type: 'GET', dataType: 'script',
+					 success: function (response) {
+					 $("#tab-content-loading").hide();
+					 },
+					 error: function (response) {
+					 $("#tab-content-loading").hide();
+					 }
+					 });
 <%       else %>
            window.location.href = "<%= url %>";
 <%       end %>
