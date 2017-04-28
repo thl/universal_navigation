@@ -2,23 +2,23 @@
    tabs_list.each do |tab| %>
      <article class="tab-pane" id="<%= tab[0] %>"></article>
 <%=  javascript_on_load do %>
-	   $('a[href="#<%= tab[0] %>"]').on('shown.bs.tab', function (e) {
-		 if($('div.tab-content > #<%= tab[0] %>').html().length==0) {
+     $('a[href="#<%= tab[0] %>"]').on('shown.bs.tab', function (e) {
+     if($('div.tab-content > #<%= tab[0] %>').html().length==0) {
 <%       url = tab[2]
          if url.start_with? '/' %>
-           $("#tab-content-loading").show();
-					 $.ajax({url: '<%= url %>', type: 'GET', dataType: 'script',
-					 success: function (response) {
-					 $("#tab-content-loading").hide();
-					 },
-					 error: function (response) {
-					 $("#tab-content-loading").hide();
-					 }
-					 });
-<%       else %>
+       $("#tab-content-loading").show();
+       $.ajax({url: '<%= url %>', type: 'GET', dataType: 'script',
+       success: function (response) {
+       $("#tab-content-loading").hide();
+       },
+       error: function (response) {
+       $("#tab-content-loading").hide();
+       }
+       });
+     <%       else %>
            window.location.href = "<%= url %>";
 <%       end %>
-		 }
-	   });
+     }
+     });
 <%   end %>
 <% end %>
