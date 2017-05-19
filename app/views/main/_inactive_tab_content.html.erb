@@ -6,13 +6,15 @@
      if($('div.tab-content > #<%= tab[0] %>').html().length==0) {
 <%       url = tab[2]
          if url.start_with? '/' %>
-       $("#tab-content-loading").show();
+       var elem = $(this);
+       var loading_markup = "<span class='tab-content-loading'></span>";
+       elem.after(loading_markup);
        $.ajax({url: '<%= url %>', type: 'GET', dataType: 'script',
        success: function (response) {
-       $("#tab-content-loading").hide();
+       elem.next('span.tab-content-loading').remove();
        },
        error: function (response) {
-       $("#tab-content-loading").hide();
+       elem.next('span.tab-content-loading').remove();
        }
        });
      <%       else %>
