@@ -24,3 +24,23 @@
      });
 <%   end %>
 <% end %>
+<%=   javascript_on_load do %>
+     if(window.location.hash){
+       var show_relationship = window.location.hash.match(/^#show_relationship=(\w+)$/);
+       if(show_relationship){
+         var menu_element = false;
+         if(show_relationship[1].toUpperCase() == "<%= "#{t 'app.short'}" %>".toUpperCase()) {
+            menu_element = $("#sidebar-first li.related > a");
+         } else if(show_relationship[1].toUpperCase() == "PLACES") {
+            menu_element = $("#sidebar-first li.places > a");
+         } else if(show_relationship[1].toUpperCase() == "TOPICS") {
+            menu_element = $("#sidebar-first li.topics > a");
+         } else if(show_relationship[1].toUpperCase() == "PICTURES") {
+            menu_element = $("#sidebar-first li.pictures > a");
+         } else if(show_relationship[1].toUpperCase() == "DOCUMENTS") {
+            menu_element = $("#sidebar-first li.documents > a");
+         }
+         if(menu_element) menu_element.trigger('click');
+       }
+    }
+<% end %>
