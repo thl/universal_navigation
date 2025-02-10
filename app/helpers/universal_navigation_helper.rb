@@ -71,7 +71,7 @@ module UniversalNavigationHelper
             else
               count = entity.send(tab[:count_method], **tab[:count_method_args])
             end
-            tabs << [tab[:id], "#{tab[:title]} <span class=\"badge\">#{count}</span>", url, tab[:shanticon]] if count > 0
+            tabs << [tab[:id], "#{tab[:title]} <span class=\"badge\">#{count}</span>", url, tab[:shanticon]] if !count.nil? && count > 0
           end
         end
       }

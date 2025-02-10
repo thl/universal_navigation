@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     universal_navigation (3.1.4)
-      rails (>= 4.0)
+      rails
 
 GEM
   remote: https://rubygems.org/
